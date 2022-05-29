@@ -1,7 +1,6 @@
 package sample;
 
 import com.mysql.jdbc.Driver;
-import sun.util.resources.LocaleData;
 
 import javax.xml.crypto.Data;
 import java.sql.*;
@@ -38,17 +37,41 @@ public class DbHandler extends Configs{
             e.printStackTrace();
         }
     }
+    public void register1(int id_employee, String mail, String password, String role){
+        String insert = "INSERT INTO " + Const.USER_TABLE_LOGINS + "(" + Const.USER_ID + "," +
+                Const.USER_MAIL + "," + Const.USER_PASSWORD + "," + Const.USER_ROLE + ")" +
+                "VALUES(?,?,?,?)";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            prSt.setInt(1, id_employee);
+            prSt.setString(2, mail);
+            prSt.setString(3, password);
+            prSt.setString(4, role);
 
-    public ResultSet  getUserID(String mail, String password){
+            prSt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ResultSet  getUserID(String name, String gender, Date date, String birth_plase,
+                                String residence_address, String registration_address){
         ResultSet resSet = null;
 
-        String select = "SELECT " + Const.USER_ID + " FROM " + Const.USER_TABLE_LOGINS + " WHERE " + Const.USER_MAIL + "=? AND " +
-                Const.USER_PASSWORD + "=?";
+        String select = "SELECT " + Const.USER_ID + " FROM " + Const.USER_TABLE + " WHERE " + Const.FULL_NAME + "=? AND " +
+                Const.BIRTH_PLASE + "=? AND " + Const.GENDER + "=? AND " + Const.BIRTH_PLASE +
+                "=? AND " + Const.RESIDENCE_ADDRESS + "=? AND " + Const.REGISTRATION_ADDRESS + "=?";
 
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
-            prSt.setString(1, mail);
-            prSt.setString(2, password);
+            prSt.setString(1, name);
+            prSt.setDate(2, date);
+            prSt.setString(3, gender);
+            prSt.setString(4, birth_plase);
+            prSt.setString(5, residence_address);
+            prSt.setString(6, registration_address);
             resSet = prSt.executeQuery();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

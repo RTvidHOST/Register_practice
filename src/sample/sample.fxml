@@ -18,8 +18,8 @@
                         <Font name="Times New Roman" size="28.0" />
                     </font>
                 </Label>
+                <Button fx:id="back" layoutX="54.0" layoutY="21.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="126.0" text="На главную" />
                 <Button fx:id="Reg_button" layoutX="284.0" layoutY="322.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="126.0" text="Регистрация" />
-                <Button layoutX="54.0" layoutY="21.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="126.0" text="Button" />
             <TextField fx:id="Name" layoutX="43.0" layoutY="107.0" promptText="ФИО" />
             <RadioButton fx:id="male" layoutX="274.0" layoutY="288.0" mnemonicParsing="false" text="Мужской" />
             <RadioButton fx:id="female" layoutX="353.0" layoutY="288.0" mnemonicParsing="false" text="Женский" />

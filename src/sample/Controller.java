@@ -56,6 +56,8 @@ public class Controller {
     LocalDate dateLD;
     DbHandler dbHandler = new DbHandler();
 
+    public static int id_employee;
+
     @FXML
     void initialize() {
 
@@ -81,14 +83,16 @@ public class Controller {
                         else{
                             dbHandler.register(Name.getText(), gender, date, birth_plase.getText(),
                                     residence_address.getText(), registration_address.getText());
-                            ResultSet resultGetID = dbHandler.getUserID(male.getText(), password.getText());
+                            ResultSet resultGetID = dbHandler.getUserID(Name.getText(), gender, date, birth_plase.getText(),
+                                    residence_address.getText(), registration_address.getText());
                             try {
                                 if(resultGetID.next()){
-                                    // authorization.id_employee = resultGetID.getINT(1);
+                                    id_employee = resultGetID.getInt(1);
                                 }
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
                             }
+                            dbHandler.register1(id_employee, mail.getText(), password.getText(), "Пользователь");
                         }
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
