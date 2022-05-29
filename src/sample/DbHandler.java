@@ -22,7 +22,6 @@ public class DbHandler extends Configs{
                 "," + Const.BIRTH_PLASE + "," + Const.RESIDENCE_ADDRESS +
                 "," + Const.REGISTRATION_ADDRESS + ")" +
                 "VALUES(?,?,?,?,?,?)";
-
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(insert);
             prSt.setString(1, Name);
@@ -39,4 +38,39 @@ public class DbHandler extends Configs{
             e.printStackTrace();
         }
     }
+
+    public ResultSet  getUserID(String mail, String password){
+        ResultSet resSet = null;
+
+        String select = "SELECT " + Const.USER_ID + " FROM " + Const.USER_TABLE_LOGINS + " WHERE " + Const.USER_MAIL + "=? AND " +
+                Const.USER_PASSWORD + "=?";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            prSt.setString(1, mail);
+            prSt.setString(2, password);
+            resSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return resSet;
+
+    }
+
+    public ResultSet  checkUser(String mail){
+        ResultSet resSet = null;
+
+        String select = "SELECT * FROM " + Const.USER_TABLE_LOGINS + " WHERE " + Const.USER_MAIL + "=?";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            prSt.setString(1, mail);
+            resSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return resSet;
+
+    }
+
 }
