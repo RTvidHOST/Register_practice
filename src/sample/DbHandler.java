@@ -59,16 +59,14 @@ public class DbHandler extends Configs{
     public ResultSet  getUserID(String name, String gender, Date date, String birth_plase,
                                 String residence_address, String registration_address){
         ResultSet resSet = null;
-
-        String select = "SELECT " + Const.USER_ID + " FROM " + Const.USER_TABLE + " WHERE " + Const.FULL_NAME + "=? AND " +
-                Const.BIRTH_PLASE + "=? AND " + Const.GENDER + "=? AND " + Const.BIRTH_PLASE +
-                "=? AND " + Const.RESIDENCE_ADDRESS + "=? AND " + Const.REGISTRATION_ADDRESS + "=?";
+        String select = "SELECT id_employee FROM person WHERE full_name=? AND male=? AND birth_date =? AND birth_plase=? " +
+                "AND residence_address =? AND registration_address=?";
 
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
             prSt.setString(1, name);
-            prSt.setDate(2, date);
-            prSt.setString(3, gender);
+            prSt.setString(2, gender);
+            prSt.setDate(3, date);
             prSt.setString(4, birth_plase);
             prSt.setString(5, residence_address);
             prSt.setString(6, registration_address);

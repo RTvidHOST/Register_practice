@@ -67,12 +67,12 @@ public class Controller {
                 dateLD = birth_date.getValue();
                 String formattedDate = dateLD.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 date = Date.valueOf(formattedDate);
-
                 String gender = "";
                 if (male.isSelected())
                     gender = "1";
                 else
                     gender = "0";
+
                 if(!Name.getText().equals("") && !gender.equals("") && !date.equals("") && !birth_plase.equals("")
                 && !registration_address.equals("") && !registration_address.equals("") && !mail.equals("") && !password.equals("")){ // Проверяет введенные даныне на пустоту
                     ResultSet resultCheckUser = dbHandler.checkUser(mail.getText());
@@ -83,11 +83,12 @@ public class Controller {
                         else{
                             dbHandler.register(Name.getText(), gender, date, birth_plase.getText(),
                                     residence_address.getText(), registration_address.getText());
+
                             ResultSet resultGetID = dbHandler.getUserID(Name.getText(), gender, date, birth_plase.getText(),
                                     residence_address.getText(), registration_address.getText());
                             try {
                                 if(resultGetID.next()){
-                                    id_employee = resultGetID.getInt(1);
+                                    id_employee = resultGetID.getInt(1); // записывает айди авторизованного пользователя
                                 }
                             } catch (SQLException e) {
                                 throw new RuntimeException(e);
