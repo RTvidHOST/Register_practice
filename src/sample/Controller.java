@@ -1,5 +1,6 @@
 package sample;
 
+import java.io.IOException;
 import java.net.URL;
 
 import java.sql.Date;
@@ -12,7 +13,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class Controller {
 
@@ -50,6 +55,9 @@ public class Controller {
     private TextField password;
 
     @FXML
+    private Button back;
+
+    @FXML
     private TextField residence_address;
 
     @FXML
@@ -63,6 +71,21 @@ public class Controller {
 
     @FXML
     void initialize() {
+
+        back.setOnAction(event -> {
+            back.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("ТУТ ПУТЬ К ОКНУ АВТОРИЗАЦИИ")); //ПУТЬ К ОКНУ АВТОРИЗАЦИИ
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        });
 
         Reg_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
