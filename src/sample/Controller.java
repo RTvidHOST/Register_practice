@@ -44,6 +44,9 @@ public class Controller {
     private TextField mail;
 
     @FXML
+    private Label Label;
+
+    @FXML
     private TextField password;
 
     @FXML
@@ -78,7 +81,7 @@ public class Controller {
                     ResultSet resultCheckUser = dbHandler.checkUser(mail.getText());
                     try {
                         if(resultCheckUser.next()){
-                            // IDLABEL.setText("Пользователь существует");
+                            Label.setText("Пользователь существует");
                         }
                         else{
                             dbHandler.register(Name.getText(), gender, date, birth_plase.getText(),
@@ -100,7 +103,7 @@ public class Controller {
                     }
                 }
                 else {
-                    // text.setText("Вы что-то не ввели");
+                    Label.setText("Вы что-то не ввели");
                 }
 
             }

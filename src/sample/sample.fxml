@@ -28,6 +28,7 @@
             <TextField fx:id="registration_address" layoutX="469.0" layoutY="167.0" promptText="Адрес регистрации" />
             <TextField fx:id="mail" layoutX="42.0" layoutY="231.0" prefHeight="26.0" prefWidth="150.0" promptText="Email" />
             <DatePicker fx:id="birth_date" layoutX="244.0" layoutY="107.0" promptText="Дата рождения" />
+            <Label fx:id="Label" layoutX="244.0" layoutY="170.0" prefHeight="60.0" prefWidth="175.0" />
             </children>
         </AnchorPane>
     </children>
